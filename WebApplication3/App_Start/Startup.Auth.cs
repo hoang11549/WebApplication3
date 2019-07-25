@@ -7,6 +7,8 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using WebApplication3.Models;
 
+
+
 namespace WebApplication3
 {
     public partial class Startup
@@ -34,7 +36,7 @@ namespace WebApplication3
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -58,9 +60,11 @@ namespace WebApplication3
                appId: "931085913898473",
                appSecret: "a3024717a0649ab0123aff8545956a4b");
 
-            app.UseGoogleAuthentication(
-        clientId: "634631336983-l0f74hna5qmmjg61df6lniav349l4hgk.apps.googleusercontent.com",
-        clientSecret: "YAAr0eGqosdQnbpkslaDFtPW");
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "634631336983-l0f74hna5qmmjg61df6lniav349l4hgk.apps.googleusercontent.com",
+                ClientSecret = "YAAr0eGqosdQnbpkslaDFtPW"
+            });
         }
     }
 }
